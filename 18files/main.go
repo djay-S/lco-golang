@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
-	"io"
 )
 
 func main() {
