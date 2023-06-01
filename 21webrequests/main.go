@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -15,6 +16,7 @@ func main() {
 	PerformGetRequest()
 	PerformCorrectPostJsonRequest()
 	PerformInCorrectPostJsonRequest()
+	PerformPostFormRequest()
 }
 
 func PerformGetRequest() {
@@ -98,4 +100,34 @@ func PerformInCorrectPostJsonRequest() {
 	content, _ := ioutil.ReadAll(response.Body)
 
 	fmt.Println(string(content))
+}
+
+func PerformPostFormRequest() {
+	fmt.Println("Handling Post Form requests")
+
+	const myUrl = myHost + "/postform"
+
+	//formdata
+	data := url.Values{}
+
+	data.Add("firstName", "D")
+	data.Add("lastName", "jay")
+	// data.Add("phone", 69420)	// -> cannot use 69420 (untyped int constant) as string value in argument to data.Add
+	data.Add("phone", "69420")
+
+	response, err := http.PostForm(myUrl, data)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer response.Body.Close()
+
+	content, err := ioutil.ReadAll(response.Body)
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Post Form Response:", string(content))
 }
