@@ -17,6 +17,7 @@ func main() {
 	fmt.Println("Welcome to Create JSON in Go")
 
 	EncodeJSON()
+	DecodeJSON()
 }
 
 func EncodeJSON() {
@@ -46,4 +47,42 @@ func EncodeJSON() {
 	}
 
 	fmt.Printf("\n%s\n", jSONIndented)
+}
+
+func DecodeJSON() {
+	fmt.Println("Decode JSON")
+
+	jsonDataFromWeb := []byte(`
+	{
+		"coursename": "ReactJS Bootcamp",
+		"Price": 299,
+		"website": "LearnCodeOnline.in",
+		"tags": ["web-dev","js"]
+	}
+	`)
+
+	var responseCourse course
+
+	isValid := json.Valid(jsonDataFromWeb)
+
+	if isValid {
+		fmt.Println("Json was valid")
+
+		json.Unmarshal(jsonDataFromWeb, &responseCourse)
+
+		fmt.Printf("%#v\n", responseCourse)
+
+	} else {
+		fmt.Println("Json was not valid")
+	}
+
+	// some case where we want to add data to key value
+	var myData map[string]interface{}
+	json.Unmarshal(jsonDataFromWeb, &myData)
+
+	fmt.Printf("%#v \n", myData)
+
+	for k, v := range myData {
+		fmt.Printf("Key is: %v, and Value is: %v and the Type is %T\n", k, v, v)
+	}
 }
