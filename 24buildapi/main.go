@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+)
 
 // Model for course - file
 type Course struct {
@@ -25,4 +28,17 @@ func (c *Course) IsEmpty() bool {
 
 func main() {
 	fmt.Println("My API")
+}
+
+//controllers -file
+
+// serve home route
+
+func serveHome(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("<h1>Welcome to the page</h1>"))
+}
+
+func getAllCourses(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Get all courses")
+	w.Header().Set("Content-Type", "application/json")
 }
