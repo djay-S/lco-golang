@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/djay-S/mongoapi/model"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -34,4 +35,17 @@ func init() {
 	// collection reference
 	fmt.Println("Collection reference is ready")
 
+}
+
+// MongoDB helpers - file
+
+// insert one record
+func insertOneMovie(movie model.Netflix) {
+	inserted, err := collection.InsertOne(context.Background(), movie)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Inserted one movie in DB with Id:", inserted.InsertedID)
 }
