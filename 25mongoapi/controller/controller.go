@@ -71,3 +71,33 @@ func updateOneMovie(movieId string) {
 
 	fmt.Println("Updated object count:", result.ModifiedCount)
 }
+
+// delete one record
+func deleteOneMovie(movieId string) {
+	id, err := primitive.ObjectIDFromHex(movieId)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	filter := bson.M{"_id": id}
+	result, err := collection.DeleteOne(context.Background(), filter)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Deleted count:", result.DeletedCount)
+}
+
+// delete all records from mongoDB
+func deleteAllMovies() int64 {
+	result, err := collection.DeleteMany(context.Background(), bson.D{{}})
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Deleted count:", result.DeletedCount)
+	return result.DeletedCount
+}
