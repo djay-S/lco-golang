@@ -2,8 +2,10 @@ package controller
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/djay-S/mongoapi/model"
 	"go.mongodb.org/mongo-driver/bson"
@@ -125,4 +127,11 @@ func fetchAllMovies() []primitive.M {
 
 	defer cursor.Close(context.Background())
 	return movies
+}
+
+// Actual controllers - file
+func GetAllMovies(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	allMovies := fetchAllMovies()
+	json.NewEncoder(w).Encode(allMovies)
 }
