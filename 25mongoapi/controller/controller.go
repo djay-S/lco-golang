@@ -15,7 +15,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const connectionString = "mongodb+srv://demo:lYIXqRCa9N9pzOICxmWP@cluster0.nevdgmh.mongodb.net/?retryWrites=true&w=majority"
+const connectionString = "mongodb+srv://demo:<ligma>@<haha-gottem>"
 const dbName = "netflix"
 const collectionName = "watchlist"
 
@@ -24,7 +24,10 @@ var collection *mongo.Collection
 
 // connect with mongoDB
 func init() {
+	// vpgegWpHSdVJX4TU
 	clientOption := options.Client().ApplyURI(connectionString)
+
+	fmt.Println("Connecting to mongoDB")
 
 	//connect to mongoDB
 	client, err := mongo.Connect(context.TODO(), clientOption)
