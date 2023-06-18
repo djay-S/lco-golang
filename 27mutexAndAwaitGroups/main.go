@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Race condition - Google.com")
+	fmt.Println("Race condition in Golang")
 
 	waitGroup := &sync.WaitGroup{}
 	mutex := &sync.Mutex{}
