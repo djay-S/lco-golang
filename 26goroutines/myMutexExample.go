@@ -8,8 +8,8 @@ import (
 var counter int = 0
 var parallelCounter int = 0
 var mutexedParallelCounter int = 0
-var waitGroup sync.WaitGroup
-var mutex sync.Mutex
+var waitGroup = &sync.WaitGroup{}
+var mutex = &sync.Mutex{}
 
 func main() {
 
