@@ -6,7 +6,11 @@ import (
 	"sync"
 )
 
+var signals = []string{"test"}
+
 var waitGroup sync.WaitGroup // these are pointers
+var mutex sync.Mutex         // these are pointers
+// Mutex provide Locks to the memory associated with a variable
 
 func main() {
 	// go greeter("Hello")
@@ -33,6 +37,8 @@ func main() {
 	}
 
 	waitGroup.Wait()
+
+	fmt.Println(signals)
 }
 
 // func greeter(s string) {
@@ -51,6 +57,10 @@ func getStatusCodeWithGoRoutine(endpoint string) {
 	if err != nil {
 		panic(err)
 	}
+
+	mutex.Lock()
+	signals = append(signals, endpoint)
+	mutex.Unlock()
 
 	fmt.Printf("%d status code for the endpoint: %s\n", result.StatusCode, endpoint)
 }
